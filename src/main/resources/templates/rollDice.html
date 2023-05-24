@@ -19,9 +19,14 @@
 
     <h2 th:if="${n}">
 
-        <h3>You selected [[${n}]]!</h3>
+        <h3 th:if="${n.equals(randomNumber)}">
+            You guessed correctly!
+        </h3>
 
-        <h3>The correct guess was [[${randomNumber}]]...</h3>
+        <h3 th:if="${!n.equals(randomNumber)}">
+            You guessed wrong... The correct number was [[${randomNumber}]]...
+        </h3>
+
     </h2>
 </body>
 </html>
