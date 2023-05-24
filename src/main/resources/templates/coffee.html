@@ -13,10 +13,26 @@
         <li><a href="/coffee/medium">Medium Roast</a></li>
         <li><a href="/coffee/light">Light Roast</a></li>
     </ul>
-    <!-- abbeviation for thymeleaf = th -->
+    <!-- abbreviation for thymeleaf = th -->
     <!-- don't need to null check like in java! (if not null) -->
-    <h2 th:if="${roast}">
-        <p>You selected <span th:text="${roast}"></span> roast!</p>
+    <h2 th:if="${coffee1}">
+        <!-- thymeleaf standard dialect (old school) -->
+        <!-- <p>You selected <span th:text="${roast}"></span> roast!</p> -->
+        <!-- thymeleaf inlined expressions -->
+        <p>You selected [[${coffee1.roast}]] roast!</p>
+        <p>We have a great [[${coffee1.roast}]] from [[${coffee1.origin}]]!!</p>
     </h2>
+
+    <div>
+        <h2>Sign up for our newsletter!</h2>
+        <form action="/coffee" method="POST">
+            <label for="email">Enter your email:</label>
+            <!-- Name in the input that you're trying to save MUST match the RequestParam name on the controller PostMapping -->
+            <input type="email" name="email" id="email">
+            <button type="submit">Sign Up</button>
+        </form>
+
+        <h3 th:if="${email}">Thanks for signing up! We'll send the newsletter to [[${email}]].</h3>
+    </div>
 </body>
 </html>
