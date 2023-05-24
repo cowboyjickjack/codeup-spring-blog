@@ -2,9 +2,22 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <title>Roll the Dice!</title>
 </head>
 <body>
+<!--Navigation bar-->
+<div id="nav-placeholder">
+
+</div>
+
+<script>
+    $(function(){
+        $("#nav-placeholder").load("navbar.html");
+    });
+</script>
+<!--end of Navigation bar-->
+
     <h1>Feeling Lucky?</h1>
     
     <h2>If so... Click a link, and roll the dice...</h2>
