@@ -13,14 +13,14 @@
         <li><a href="/coffee/medium">Medium Roast</a></li>
         <li><a href="/coffee/light">Light Roast</a></li>
     </ul>
-    <!-- abbreviation for thymeleaf = th -->
-    <!-- don't need to null check like in java! (if not null) -->
-    <h2 th:if="${coffee1}">
-        <!-- thymeleaf standard dialect (old school) -->
-        <!-- <p>You selected <span th:text="${roast}"></span> roast!</p> -->
-        <!-- thymeleaf inlined expressions -->
-        <p>You selected [[${coffee1.roast}]] roast!</p>
-        <p>We have a great [[${coffee1.roast}]] from [[${coffee1.origin}]]!!</p>
+
+    <h2 th:if="${coffees}">
+        <p>You selected [[${roast}]]!</p>
+        <ul>
+            <li th:each="coffee : ${coffees}">
+                <p>[[${coffee.brand}]] [[${coffee.origin}]] [[${coffee.roast}]] roast</p>
+            </li>
+        </ul>
     </h2>
 
     <div>

@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 public class CoffeeController {
 
@@ -42,7 +45,9 @@ public class CoffeeController {
             coffee2.setOrigin("Ethiopia");
         }
         // then we make a list!
-        model.addAttribute("coffee", coffee1);
+        List<Coffee> coffees = new ArrayList<>(List.of(coffee1, coffee2));
+        model.addAttribute("roast", roast);
+        model.addAttribute("coffees", coffees);
         return "coffee";
     }
 }
