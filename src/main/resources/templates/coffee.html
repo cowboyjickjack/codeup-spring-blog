@@ -5,16 +5,7 @@
     <title>Coffee</title>
 </head>
 <body>
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-
-        <div class="navbar-header">
-            <a class="navbar-brand" href="/coffee">Coffee</a>
-            <a class="navbar-brand" href="/roll-dice">Roll Dice</a>
-        </div>
-
-    </div>
-</nav>
+<nav th:replace="partials/navbar.html :: navbar"></nav>
     <h1>Coffee!</h1>
     <h2>What's your favorite roast?</h2>
     <ul>

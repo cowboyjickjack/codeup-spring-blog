@@ -2,20 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-    <title>Roll the Dice!</title>
+    <title>Roll Dice!</title>
 </head>
 <body>
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-
-        <div class="navbar-header">
-            <a class="navbar-brand" href="/coffee">Coffee</a>
-            <a class="navbar-brand" href="/roll-dice">Roll Dice</a>
-        </div>
-
-    </div>
-</nav>
+<nav th:replace="partials/navbar :: navbar"></nav>
     <h1>Feeling Lucky?</h1>
     
     <h2>If so... Click a link, and roll the dice...</h2>
@@ -31,7 +21,7 @@
     <h2 th:if="${n}">
 
         <h3 th:if="${n.equals(randomNumber)}">
-            You guessed correctly!
+            You guessed [[${n}]] and guessed correctly!
         </h3>
 
         <h3 th:if="${!n.equals(randomNumber)}">
@@ -39,5 +29,6 @@
         </h3>
 
     </h2>
+<footer th:replace="partials/footer :: footer"></footer>
 </body>
 </html>
