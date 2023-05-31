@@ -1,42 +1,49 @@
 package com.codeup.codeupspringblog.controllers;
 
 import com.codeup.codeupspringblog.models.Post;
+import com.codeup.codeupspringblog.repositories.PostsRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 public class PostController {
 
-    @GetMapping(path = "/posts")
-    @ResponseBody
-    public String allPosts(Model model){
-        List<Post> posts = new ArrayList<>();
-        Post post1 = new Post("New Phone", "Call me!");
-        Post post2 = new Post("Need New Songs", "What should I listen to?");
-        posts.add(post1);
-        posts.add(post2);
+    private PostsRepository postsDao;
 
+    public PostController(PostsRepository postsDao){
+        this.postsDao = postsDao;
+    }
+
+    @GetMapping("/posts")
+    public String allPosts(Model model) {
+        List<Post> posts = postsDao.findAll();
         model.addAttribute("posts", posts);
         return "posts/index";
     }
 
-    @PostMapping("/posts")
-    @ResponseBody
-    public String individualPost(Model model){
-        Post post = new Post("Help", "I need help.");
+
+    @GetMapping("/posts/{id}")
+    public String individualPost(@PathVariable long id, Model model) {
+        Post post = postsDao.findById(id);
         model.addAttribute("post", post);
         return "posts/show";
     }
 
-    @GetMapping(path = "/index/create")
-    @ResponseBody
-    public String showPost(@PathVariable String title, String body, Model model){
-        return "index";
+    @GetMapping("/post-o-matic")
+    public String createForm() {
+        return "posts/create";
     }
 
+    @PostMapping("/posts/create")
+    public String submitForm(@RequestParam(name="title") String title, @RequestParam(name="body") String body) {
+        Post post = new Post(title, body);
+        postsDao.save(post);
+        return "redirect:/posts";
+    }
 }
